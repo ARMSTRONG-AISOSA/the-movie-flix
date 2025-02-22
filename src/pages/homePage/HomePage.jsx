@@ -5,7 +5,7 @@ import './homePage.css';
 const HomePage = () => {
 
     // State: a hook
-    const tes = useState;
+    const [searchQuery, setSearchQuery] = useState("");
 
     // Movie data object
     const movies = [
@@ -15,8 +15,12 @@ const HomePage = () => {
     ];
 
     // Functions
-    function handleSearch() {
-        // Form Submit
+    function handleSearch(e) {
+        // keep the form submit from refreshing the page 
+        e.preventDefault();
+        alert(searchQuery);
+        // set the input filled to empty
+        setSearchQuery("");
     }
 
     return (
@@ -25,7 +29,12 @@ const HomePage = () => {
                 onSubmit={handleSearch}
                 className='search-form'
             >
-                <input type="text" placeholder='Search for movies...' className='search-input' />
+                <input
+                    type="text"
+                    placeholder='Search for movies...' className='search-input'
+                    value={searchQuery}
+                    onChange={(e) => (setSearchQuery(e.target.value))}
+                />
 
                 <button type='submit' className='search-button'>Search</button>
             </form>
@@ -33,8 +42,13 @@ const HomePage = () => {
             <div className='movies-grid'>
                 {movies.map((movie) => (
                     <>
-                        <MovieCard movie={movie} key={movie.id} />
-                        <br />
+                        {/* Conditional render */}
+                        {movie.title.toLowerCase().includes(searchQuery.toLowerCase()) && (
+                            <>
+                                <MovieCard movie={movie} key={movie.id} />
+                                <br />
+                            </>
+                        )}
                     </>
 
                 ))}
