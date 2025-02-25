@@ -1,4 +1,4 @@
-/* .movie-card {
+.movie-card {
     position: relative;
     border-radius: 8px;
     overflow: hidden;
@@ -40,6 +40,7 @@
     flex-direction: column;
     justify-content: flex-end;
     padding: 1rem;
+    background-color: red;
 }
 
 .movie-card:hover .movie-overlay {
@@ -66,6 +67,7 @@
 .favorite-btn:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
+
 
 .favorite-btn.active {
     color: #ff4757;
@@ -119,4 +121,4 @@
         height: 32px;
         font-size: 1.2rem;
     }
-} */
+}

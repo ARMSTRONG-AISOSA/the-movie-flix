@@ -1,7 +1,7 @@
 // import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homePage/HomePage';
-import Favourites from './pages/favorites/Favourites';
+// import Favourites from './pages/favorites/Favourites';
 
 
 function App() {
@@ -9,6 +9,7 @@ function App() {
   return (
     <div>
       <HomePage />
+      {/* <Favourites /> */}
     </div>
   )
 }

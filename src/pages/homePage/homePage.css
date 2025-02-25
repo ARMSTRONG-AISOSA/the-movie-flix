@@ -1,7 +1,6 @@
-/* .home {
+.home-page {
     padding: 2rem 0;
     width: 100%;
-    box-sizing: border-box;
 }
 
 .search-form {
@@ -10,7 +9,6 @@
     display: flex;
     gap: 1rem;
     padding: 0 1rem;
-    box-sizing: border-box;
 }
 
 .search-input {
@@ -42,9 +40,8 @@
     background-color: #f40612;
 }
 
-
 @media (max-width: 639px) {
-    .home {
+    .home-page {
         padding: 1rem 0;
     }
 
@@ -55,9 +52,28 @@
 
 .movies-grid {
     display: grid;
+    /* Check Note for explanation */
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
     padding: 1rem;
     width: 100%;
-    box-sizing: border-box;
-} */
+}
+
+/* ============= Notes ============= */
+/* 
+Explanation of the CSS Code
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+This CSS rule is used in CSS Grid Layout to create a responsive grid with dynamic columns.
+
+
+grid-template-columns: Defines the number of columns in a grid layout.
+
+repeat(auto-fit, ...)
+repeat() generates multiple columns dynamically.
+auto-fit automatically adjusts the number of columns based on available space.
+
+minmax(300px, 1fr)
+minmax() ensures each column has a minimum and maximum width:
+300px: Each column is at least 300 pixels wide.
+1fr: Each column can grow up to 1 fraction of available space.
+ */
