@@ -46,7 +46,6 @@ const HomePage = () => {
                         {movie.title.toLowerCase().includes(searchQuery.toLowerCase()) && (
                             <>
                                 <MovieCard movie={movie} key={movie.id} />
-                                <br />
                             </>
                         )}
                     </>
