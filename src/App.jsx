@@ -1,14 +1,16 @@
 import { Routes, Route } from 'react-router-dom';
-import './App.css';
+import './app.css';
 import HomePage from './pages/homePage/HomePage';
 import Favorites from './pages/favorites/Favorites';
 import ErrorPage from './components/errorPage/ErrorPage';
+import Navbar from './components/navbar/Navbar';
 
 
 function App() {
 
   return (
     <main className='main-content'>
+      <Navbar />
       <Routes>
         <Route path='/the-movie-flix' element={<HomePage />} />
         <Route path='/the-movie-flix/favorites' element={<Favorites />} />
