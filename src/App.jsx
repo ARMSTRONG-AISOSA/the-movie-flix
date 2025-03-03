@@ -1,16 +1,21 @@
-// import { Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import HomePage from './pages/homePage/HomePage';
-// import Favourites from './pages/favorites/Favourites';
+import Favorites from './pages/favorites/Favorites';
+import ErrorPage from './components/errorPage/ErrorPage';
 
 
 function App() {
 
   return (
-    <div>
-      <HomePage />
-      {/* <Favourites /> */}
-    </div>
+    <main className='main-content'>
+      <Routes>
+        <Route path='/the-movie-flix' element={<HomePage />} />
+        <Route path='/the-movie-flix/favorites' element={<Favorites />} />
+        {/* Catch-all route for 404 errors */}
+        <Route path='*' element={<ErrorPage />} />
+      </Routes>
+    </main>
   )
 }
 

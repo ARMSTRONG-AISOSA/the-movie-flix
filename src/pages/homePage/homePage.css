@@ -40,16 +40,6 @@
     background-color: #f40612;
 }
 
-@media (max-width: 639px) {
-    .home-page {
-        padding: 1rem 0;
-    }
-
-    .search-form {
-        margin-bottom: 1rem;
-    }
-}
-
 .movies-grid {
     display: grid;
     /* Check Note for explanation */
@@ -60,6 +50,24 @@
     justify-content: center; /* Ensures grid items align properly */
     align-items: stretch; /* Makes all movie cards the same height */
 }
+
+/* ================== Responsiveness ================== */
+
+@media (max-width: 639px) {
+    .home-page {
+        padding: 1rem 0;
+    }
+
+    .search-form {
+        margin-bottom: 1rem;
+    }
+
+    .movies-grid {
+        padding: 2rem;
+    }
+}
+
+
 
 
 
