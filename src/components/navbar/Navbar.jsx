@@ -10,6 +10,8 @@ const Navbar = () => {
 
     // useEffect
     useEffect(() => {
+
+        // window.innerWidth: checks the current screen width
         const updateLogo = () => {
             if (window.innerWidth >= 1024) {
                 setLogo(desktop_logo);
@@ -21,13 +23,16 @@ const Navbar = () => {
         };
 
         updateLogo(); // set initial logo
-        // ✅ Add event listener
+
+        // Add event listener
+        // Every time the window is resized, updateLogo() will run
         window.addEventListener('resize', updateLogo);
 
-        // ✅ Cleanup function to remove event listener when component unmounts
+        // Cleanup function to remove event listener when component unmounts
         return () => {
             window.removeEventListener('resize', updateLogo);
-        };
+        };  // !Important: Check below for some notes.
+
     }, [])
 
 
@@ -37,6 +42,7 @@ const Navbar = () => {
                 <Link to='/the-movie-flix'>
                     <img
                         src={logo}
+                        className='logo'
                         alt="logo"
                     />
                 </Link>
@@ -50,3 +56,14 @@ const Navbar = () => {
 }
 
 export default Navbar;
+
+
+// When you define a function inside useEffect and return it, React will run that function when:
+// The component unmounts (removed from the DOM).
+// The effect re-runs due to changes in dependencies (if any).
+
+// Use a cleanup function whenever your effect:
+// Adds event listeners (e.g., resize, scroll, keydown).
+// Starts intervals or timeouts (e.g., setInterval, setTimeout).
+// Opens WebSocket or API connections.
+// How return Works in useEffect

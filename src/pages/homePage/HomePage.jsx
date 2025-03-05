@@ -1,18 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MovieCard from '../../components/movieCard/MovieCard';
 import './homePage.css';
+import { getPopularMovies, searchMovies } from '../../services/api';
 
 const HomePage = () => {
 
     // State: a hook
     const [searchQuery, setSearchQuery] = useState("");
+    const [movies, setMovies] = useState([]);
 
+    // UseEffect
     // Movie data object
-    const movies = [
-        { id: 1, title: "Toy Story", release_date: 2020 },
-        { id: 2, title: "Primal", release_date: 2024 },
-        { id: 3, title: "Deadepool 3", release_date: 2024 }
-    ];
+    useEffect(() => {}, []);
 
     // Functions
     function handleSearch(e) {

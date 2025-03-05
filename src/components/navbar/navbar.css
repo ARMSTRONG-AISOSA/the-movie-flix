@@ -1,6 +1,4 @@
-
-
-/* .navbar {
+.navbar {
     background-color: #000000;
     padding: 1rem 2rem;
     display: flex;
@@ -9,9 +7,10 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-logo {
-    font-size: 1.5rem;
-    font-weight: bold;
+.logo {
+    filter: invert(1);
+    /* Inverst the color from black to white */
+    height: 60px;
 }
 
 .navbar-links {
@@ -30,13 +29,12 @@
     background-color: rgba(255, 255, 255, 0.1);
 }
 
+
+/* ================ Responsiveness ================ */
+
 @media (max-width: 768px) {
     .navbar {
         padding: 1rem;
-    }
-
-    .navbar-logo {
-        font-size: 1.2rem;
     }
 
     .navbar-links {
@@ -46,4 +44,18 @@
     .nav-link {
         padding: 0.5rem;
     }
-} */
+}
+
+@media (max-width: 768px) {
+
+    .logo {
+        height: 50px;
+    }
+}
+
+@media (max-width: 425px) {
+
+    .logo {
+        height: 40px;
+    }
+}

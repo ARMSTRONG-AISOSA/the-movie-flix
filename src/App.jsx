@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import './app.css';
 import HomePage from './pages/homePage/HomePage';
 import Favorites from './pages/favorites/Favorites';
-import ErrorPage from './components/errorPage/ErrorPage';
+import ErrorPage from './pages/errorPage/ErrorPage';
 import Navbar from './components/navbar/Navbar';
 
 
