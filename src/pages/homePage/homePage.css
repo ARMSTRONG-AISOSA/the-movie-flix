@@ -34,6 +34,7 @@
     font-weight: 500;
     transition: background-color 0.2s;
     white-space: nowrap;
+    cursor: pointer;
 }
 
 .search-button:hover {

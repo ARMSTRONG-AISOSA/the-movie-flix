@@ -8,10 +8,30 @@ const HomePage = () => {
     // State: a hook
     const [searchQuery, setSearchQuery] = useState("");
     const [movies, setMovies] = useState([]);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     // UseEffect
     // Movie data object
-    useEffect(() => {}, []);
+    useEffect(() => {
+        const loadPopularMovies = async () => {
+            try {
+                const popularMovies = await getPopularMovies();
+                //Console
+
+                console.log(popularMovies);
+
+                setMovies(popularMovies)
+            } catch (error) {
+                console.log(error);
+                setError("Failed to load movies...")
+            } finally {
+                setLoading(false); // when we are no longer loading
+            }
+        }
+
+        loadPopularMovies();
+    }, []);
 
     // Functions
     function handleSearch(e) {

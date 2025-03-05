@@ -40,7 +40,6 @@
     flex-direction: column;
     justify-content: flex-end;
     padding: 1rem;
-    background-color: red;
 }
 
 .movie-card:hover .movie-overlay {
