@@ -25,6 +25,16 @@
     object-fit: cover;
 }
 
+.movie-overview {
+    color: rgba(255, 255, 255, 0.733);
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.726);
+}
+
 .movie-overlay {
     position: absolute;
     top: 0;

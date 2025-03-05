@@ -3,8 +3,8 @@ import './movieCard.css';
 const MovieCard = ({ movie }) => {
 
     // function
-    function onFavouriteClick() {
-        alert("Favourite Clicked!");
+    function onFavoriteClick() {
+        alert("Favorite Clicked!");
         console.log("poster Data", movie);
     }
 
@@ -13,9 +13,12 @@ const MovieCard = ({ movie }) => {
             <div className='movie-poster'>
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                 <div className='movie-overlay'>
+
+                    {/* <p className='movie-overview'>{movie.overview}</p> */}
+
                     <button
-                        className='favourite-btn'
-                        onClick={onFavouriteClick}
+                        className='favorite-btn'
+                        onClick={onFavoriteClick}
                     >
                         ♥
                     </button>

@@ -61,6 +61,17 @@
 
     .search-form {
         margin-bottom: 1rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-button {
+        width: 100px;
+    }
+
+    .search-input {
+        width:  100%;
     }
 
     .movies-grid {
