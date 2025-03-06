@@ -33,10 +33,10 @@ export const getPopularMovies = async (page) => {
     }
 }
 
-export const searchMovies = async (query) => {
+export const searchMovies = async (query, pageSearch) => {
     try {
         const response = await fetch(
-            `${BASE_URL}/search/movie/popular?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
+            `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${pageSearch}`
         );
 
         // Console check

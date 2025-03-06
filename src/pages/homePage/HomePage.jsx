@@ -15,15 +15,25 @@ const HomePage = () => {
     // UseEffect
     // Movie data object
     useEffect(() => {
-        const loadPopularMovies = async () => {
+        const loadMovies = async () => {
+
+            setLoading(true);//Show loading while fetching data
+
+            let fetchedMovies = [];
+
             try {
-                setLoading(true);//Show loading while fetching data
-                const popularMovies = await getPopularMovies(page);
+
+                if (searchQuery) {
+                    fetchedMovies = await searchMovies(searchQuery, page);
+
+                } else {
+                    fetchedMovies = await getPopularMovies(page);
+                }
+
                 //Console
+                console.log(`Movies for page ${page}:`, fetchedMovies);
 
-                console.log(`Movies for page ${page}:`, popularMovies);
-
-                setMovies(popularMovies);
+                setMovies(fetchedMovies);
                 setError(null); //Clear previous errors
             } catch (error) {
                 console.log(error);
@@ -33,11 +43,11 @@ const HomePage = () => {
             }
         }
 
-        loadPopularMovies();
-    }, [page]); //Re-run effect when "page" changes
+        loadMovies();
+    }, [page, searchQuery]); //Re-run effect when "page" or "searchQuery" changes
 
     // Functions
-    //Switch to next page
+    //Switch pages
     const nextPage = () => {
         // updater function
         // it receives the previous state value(prevPage).
@@ -46,7 +56,6 @@ const HomePage = () => {
         setPage((prevPage) => prevPage + 1);
     };
 
-    //Switch to prev. page
     const prevPage = () => {
         setPage((prevPage) => Math.max((prevPage - 1), 1));
     };
@@ -55,13 +64,12 @@ const HomePage = () => {
     function handleSearch(e) {
         // keep the form submit from refreshing the page 
         e.preventDefault();
+        
         if (!searchQuery.trim()) {
             return
-        }
+        };
 
-        // alert(searchQuery);
-        // set the input filled to empty
-        setSearchQuery("");
+        setPage(1); //Reset to first page on new search
     }
 
     return (
