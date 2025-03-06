@@ -2,26 +2,29 @@ const API_KEY = "5de6ed9ebc4ca6d72c84cfeec47e8c20";
 const BASE_URL = "https://api.themoviedb.org/3";
 
 
-export const getPopularMovies = async () => {
+
+export const getPopularMovies = async (page) => {
     try {
 
         // Fetch: a function used to send a network request
         const response = await fetch(
-            `${BASE_URL}/movie/popular?api_key=${API_KEY}`
+            `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`
         );
 
         // Console check        
+        console.log("response");
         console.log(response);
 
         if (!response.ok) {
             throw new Error(`Failed to fetch movies: ${response.status} ${response.statusText}`);
         }
 
-        // The .json() method parses the response body and converts it from JSON format into a JavaScript object.
         const data = await response.json();
 
         // Console check
+        console.log("data");
         console.log(data);
+        console.log("data.results");
         console.log(data.results);
 
         return data.results;

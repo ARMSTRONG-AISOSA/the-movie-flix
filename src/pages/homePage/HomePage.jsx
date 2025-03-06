@@ -10,30 +10,44 @@ const HomePage = () => {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [page, setPage] = useState(1); // Current page
 
     // UseEffect
     // Movie data object
     useEffect(() => {
         const loadPopularMovies = async () => {
             try {
-                const popularMovies = await getPopularMovies();
+                setLoading(true);//Show loading while fetching data
+                const popularMovies = await getPopularMovies(page);
                 //Console
 
-                console.log(popularMovies);
+                console.log(`Movies for page ${page}:`, popularMovies);
 
-                setMovies(popularMovies)
+                setMovies(popularMovies);
+                setError(null); //Clear previous errors
             } catch (error) {
                 console.log(error);
-                setError("Failed to load movies...")
+                setError("Failed to load movies...");
             } finally {
-                setLoading(false); // when we are no longer loading
+                setLoading(false); // Clears this when we are no longer fetching data
             }
         }
 
         loadPopularMovies();
-    }, []);
+    }, [page]); //Re-run effect when "page" changes
 
     // Functions
+    //Switch to next page
+    const nextPage = () => {
+        setPage(page + 1);
+    };
+
+    //Switch to prev. page
+    const prevPage = () => {
+        setPage(page - 1);
+    };
+
+
     function handleSearch(e) {
         // keep the form submit from refreshing the page 
         e.preventDefault();
@@ -43,35 +57,58 @@ const HomePage = () => {
     }
 
     return (
-        <div className='home-page'>
-            <form
-                onSubmit={handleSearch}
-                className='search-form'
-            >
-                <input
-                    type="text"
-                    placeholder='Search for movies...' className='search-input'
-                    value={searchQuery}
-                    onChange={(e) => (setSearchQuery(e.target.value))}
-                />
+        <>
+            {loading && <p>Loading movies</p>}
+            {error && <p className='error'>{error}</p>}
 
-                <button type='submit' className='search-button'>Search</button>
-            </form>
+            {/* Movies Grid */}
+            <div className='home-page'>
+                <form
+                    onSubmit={handleSearch}
+                    className='search-form'
+                >
+                    <input
+                        type="text"
+                        placeholder='Search for movies...' className='search-input'
+                        value={searchQuery}
+                        onChange={(e) => (setSearchQuery(e.target.value))}
+                    />
 
-            <div className='movies-grid'>
-                {movies.map((movie) => (
-                    <>
-                        {/* Conditional render */}
-                        {movie.title.toLowerCase().includes(searchQuery.toLowerCase()) && (
-                            <>
-                                <MovieCard movie={movie} key={movie.id} />
-                            </>
-                        )}
-                    </>
+                    <button type='submit' className='search-button'>Search</button>
+                </form>
 
-                ))}
+                <div className='movies-grid'>
+                    {movies.map((movie) => (
+                        <>
+                            {/* Conditional render */}
+                            {movie.title.toLowerCase().includes(searchQuery.toLowerCase()) && (
+                                <>
+                                    <MovieCard movie={movie} key={movie.id} />
+                                </>
+                            )}
+                        </>
+
+                    ))}
+                </div>
             </div>
-        </div>
+
+            {/* Pagination Buttons */}
+            <div className='pagination'>
+                <button
+                    onClick={prevPage}
+                    disabled={page === 1}
+                > Previous</button>
+
+                <span> Page {page} </span>
+
+                <button
+                    onClick={nextPage}
+                >
+                    Next
+                </button>
+            </div>
+        </>
+
     )
 }
 
