@@ -39,28 +39,33 @@ const HomePage = () => {
     // Functions
     //Switch to next page
     const nextPage = () => {
-        setPage(page + 1);
+        // updater function
+        // it receives the previous state value(prevPage).
+        // It returns the new state value (prevPage + 1).
+        // done to prevent stale state
+        setPage((prevPage) => prevPage + 1);
     };
 
     //Switch to prev. page
     const prevPage = () => {
-        setPage(page - 1);
+        setPage((prevPage) => Math.max((prevPage - 1), 1));
     };
 
 
     function handleSearch(e) {
         // keep the form submit from refreshing the page 
         e.preventDefault();
-        alert(searchQuery);
+        if (!searchQuery.trim()) {
+            return
+        }
+
+        // alert(searchQuery);
         // set the input filled to empty
         setSearchQuery("");
     }
 
     return (
         <>
-            {loading && <p>Loading movies</p>}
-            {error && <p className='error'>{error}</p>}
-
             {/* Movies Grid */}
             <div className='home-page'>
                 <form
@@ -77,19 +82,27 @@ const HomePage = () => {
                     <button type='submit' className='search-button'>Search</button>
                 </form>
 
-                <div className='movies-grid'>
-                    {movies.map((movie) => (
-                        <>
-                            {/* Conditional render */}
-                            {movie.title.toLowerCase().includes(searchQuery.toLowerCase()) && (
-                                <>
-                                    <MovieCard movie={movie} key={movie.id} />
-                                </>
-                            )}
-                        </>
+                {/* Error message */}
+                {error && <p className='error'>{error}</p>}
 
-                    ))}
-                </div>
+                {loading ? (
+                    <div>Loading movies</div>
+                ) : (
+                    <div className='movies-grid'>
+                        {movies.map((movie) => (
+                            <>
+                                {/* Conditional render */}
+                                {movie.title.toLowerCase().includes(searchQuery.toLowerCase()) && (
+                                    <>
+                                        <MovieCard movie={movie} key={movie.id} />
+                                    </>
+                                )}
+                            </>
+
+                        ))}
+                    </div>
+                )}
+
             </div>
 
             {/* Pagination Buttons */}
