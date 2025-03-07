@@ -1,6 +1,6 @@
 import './movieCard.css';
 
-const MovieCard = ({ movie }) => {
+const MovieCard = ({ movie, onClick }) => {
 
     // function
     function onFavoriteClick() {
@@ -9,16 +9,18 @@ const MovieCard = ({ movie }) => {
     }
 
     return (
-        <div className='movie-card'>
+        <div className='movie-card' onClick={onClick}>
             <div className='movie-poster'>
                 <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
                 <div className='movie-overlay'>
 
-                    {/* <p className='movie-overview'>{movie.overview}</p> */}
-
                     <button
                         className='favorite-btn'
-                        onClick={onFavoriteClick}
+                        onClick={(e) => {
+                            // Prevents clicking the heart from triggering the card click
+                            e.stopPropagation();
+                            onFavoriteClick();
+                        }}
                     >
                         ♥
                     </button>
@@ -32,4 +34,4 @@ const MovieCard = ({ movie }) => {
     )
 }
 
-export default MovieCard
+export default MovieCard;

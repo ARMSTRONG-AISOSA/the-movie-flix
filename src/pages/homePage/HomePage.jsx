@@ -12,6 +12,7 @@ const HomePage = () => {
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1); // Current page
     const [totalPages, setTotalPages] = useState(1); // Track total pages
+    const [selectedMovie, setSelectedMovie] = useState(null);
 
     // UseEffect
     // Movie data object
@@ -72,6 +73,7 @@ const HomePage = () => {
     };
 
 
+    // Function to handle searches
     function handleSearch(e) {
         // keep the form submit from refreshing the page 
         e.preventDefault();
@@ -81,13 +83,23 @@ const HomePage = () => {
         };
 
         setPage(1); //Reset to first page on new search
-    }
+    };
+
+    // Function to open modal with details of clicked movie
+    const openMovieDetails = (movie) => {
+        setSelectedMovie(movie);
+    };
+
+    // Function to close modal
+    const closeMovieDetails = () => {
+        setSelectedMovie(null);;
+    };
 
     return (
-        <>
-
+        <div>
+            {/* --- */}
             <div className='home-page'>
-                {/* Movies Grid */}
+                {/* Search form */}
                 <form
                     onSubmit={handleSearch}
                     className='search-form'
@@ -105,6 +117,7 @@ const HomePage = () => {
                 {/* Error message */}
                 {error && <p className='error'>{error}</p>}
 
+                {/* Movies grid */}
                 {loading ? (
                     <div>Loading movies</div>
                 ) : (
@@ -113,7 +126,12 @@ const HomePage = () => {
                             <>
                                 {/* Conditional render */}
                                 {movie.title.toLowerCase().includes(searchQuery.toLowerCase()) && (
-                                    <MovieCard movie={movie} key={movie.id} />
+                                        <MovieCard
+                                            key={movie.id}
+                                            movie={movie}
+                                            onClick={() => openMovieDetails(movie)}
+                                        />
+
                                 )}
                             </>
 
@@ -139,7 +157,27 @@ const HomePage = () => {
                     Next
                 </button>
             </div>
-        </>
+
+            {/* Movie Modal */}
+            {selectedMovie && (
+                <div 
+                className='movie-modal'
+                onClick={closeMovieDetails}
+                >
+                    <div className='modal-content'>
+                        <span
+                            className='close-btn'
+                            onClick={closeMovieDetails}
+                        >&times;</span>
+
+                        <h2>{selectedMovie.title}</h2>
+                        <img src={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`} alt={selectedMovie.tite} />
+                        <p><strong>Release Date:</strong> {selectedMovie.release_date}</p>
+                        <p><strong>Overview:</strong> {selectedMovie.overview}</p>
+                    </div>
+                </div>
+            )}
+        </div>
 
     )
 }
