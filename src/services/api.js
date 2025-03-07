@@ -11,36 +11,23 @@ export const getPopularMovies = async (page) => {
             `${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`
         );
 
-        // Console check        
-        console.log("response");
-        console.log(response);
-
         if (!response.ok) {
             throw new Error(`Failed to fetch movies: ${response.status} ${response.statusText}`);
         }
 
         const data = await response.json();
 
-        // Console check
-        console.log("data");
-        console.log(data);
-        console.log("data.results");
-        console.log(data.results);
-
-        return data.results;
+        return data;
     } catch (error) {
         console.error('Error searching for movie:', error);
     }
 }
 
-export const searchMovies = async (query, pageSearch) => {
+export const searchMovies = async (query, page) => {
     try {
         const response = await fetch(
-            `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${pageSearch}`
+            `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(query)}&page=${page}`
         );
-
-        // Console check
-        console.log(response);
 
         if (!response.ok) {
             throw new Error(`Failed to search/fetch movies: ${response.status} ${response.statusText}`);
@@ -48,11 +35,7 @@ export const searchMovies = async (query, pageSearch) => {
 
         const data = await response.json();
 
-        // Console check
-        console.log(data);
-        console.log(data.results);
-
-        return data.results;
+        return data;
     } catch (error) {
         console.error('Error searching for movie:', error)
     }

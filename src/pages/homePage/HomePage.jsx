@@ -11,6 +11,7 @@ const HomePage = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1); // Current page
+    const [totalPages, setTotalPages] = useState(1); // Track total pages
 
     // UseEffect
     // Movie data object
@@ -20,20 +21,29 @@ const HomePage = () => {
             setLoading(true);//Show loading while fetching data
 
             let fetchedMovies = [];
+            let fetchedTotalPages = 1;
+            let response = [];
 
             try {
 
                 if (searchQuery) {
-                    fetchedMovies = await searchMovies(searchQuery, page);
+                    response = await searchMovies(searchQuery, page);
 
                 } else {
-                    fetchedMovies = await getPopularMovies(page);
+                    response = await getPopularMovies(page);
                 }
 
+                fetchedMovies = response.results; // Extract movie results
+                fetchedTotalPages = response.total_pages; // Extracts total pages from API
+
                 //Console
+                console.log(response);
+                console.log(fetchedTotalPages);
                 console.log(`Movies for page ${page}:`, fetchedMovies);
 
-                setMovies(fetchedMovies);
+                // Data
+                setMovies(fetchedMovies); //Update Movie object data
+                setTotalPages(fetchedTotalPages); //Update total pages
                 setError(null); //Clear previous errors
             } catch (error) {
                 console.log(error);
@@ -64,7 +74,7 @@ const HomePage = () => {
     function handleSearch(e) {
         // keep the form submit from refreshing the page 
         e.preventDefault();
-        
+
         if (!searchQuery.trim()) {
             return
         };
@@ -74,8 +84,9 @@ const HomePage = () => {
 
     return (
         <>
-            {/* Movies Grid */}
+
             <div className='home-page'>
+                {/* Movies Grid */}
                 <form
                     onSubmit={handleSearch}
                     className='search-form'
@@ -101,9 +112,7 @@ const HomePage = () => {
                             <>
                                 {/* Conditional render */}
                                 {movie.title.toLowerCase().includes(searchQuery.toLowerCase()) && (
-                                    <>
-                                        <MovieCard movie={movie} key={movie.id} />
-                                    </>
+                                    <MovieCard movie={movie} key={movie.id} />
                                 )}
                             </>
 
@@ -120,10 +129,11 @@ const HomePage = () => {
                     disabled={page === 1}
                 > Previous</button>
 
-                <span> Page {page} </span>
+                <span> Page {page} of {totalPages} Total Pages </span>
 
                 <button
                     onClick={nextPage}
+                    disabled={page >= totalPages}
                 >
                     Next
                 </button>
