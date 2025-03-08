@@ -162,8 +162,12 @@ const HomePage = () => {
             {selectedMovie && (
                 <div 
                 className='movie-modal'
-                onClick={closeMovieDetails}
                 >
+                    <div
+                    className='movie-modal-background'
+                    onClick={closeMovieDetails}
+                    ></div>
+
                     <div className='modal-content'>
                         <span
                             className='close-btn'
