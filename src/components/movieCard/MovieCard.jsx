@@ -1,6 +1,11 @@
+import { useState } from 'react';
 import './movieCard.css';
 
 const MovieCard = ({ movie, onClick }) => {
+
+    // State Management
+    const [imageLoaded, setImageLoaded] = useState(false);
+
 
     // function
     function onFavoriteClick() {
@@ -8,10 +13,27 @@ const MovieCard = ({ movie, onClick }) => {
         console.log("poster Data", movie);
     }
 
+    // Skeleton Image 
+    const skeletonImgHandle = () => {
+        setImageLoaded(true);
+    }
+
     return (
-        <div className='movie-card' onClick={onClick}>
-            <div className='movie-poster'>
-                <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+        <div className='movie-card'>
+
+            <div className='movie-poster' onClick={onClick}>
+                {!imageLoaded && <div className={`skeleton-image `}>
+                    <p
+                        // className={`${visibility ? "visible" : "hide"}`}
+                        className={`visibility-animation`}
+                    >No Image Found!</p>
+                </div>}
+                <img
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    onLoad={skeletonImgHandle}
+                />
+
                 <div className='movie-overlay'>
 
                     <button
