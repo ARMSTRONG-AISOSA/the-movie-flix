@@ -1,63 +1,3 @@
-.home-page {
-    padding: 2rem 0;
-    width: 100%;
-}
-
-.search-form {
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    display: flex;
-    gap: 1rem;
-    padding: 0 1rem;
-}
-
-.search-input {
-    flex: 1;
-    padding: 0.75rem 1rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #333;
-    color: white;
-    font-size: 1rem;
-}
-
-.search-input:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px #666;
-}
-
-.search-button {
-    padding: 0.75rem 1.5rem;
-    background-color: #e50914;
-    color: white;
-    border-radius: 4px;
-    font-weight: 500;
-    transition: all 0.2s;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.search-button:hover {
-    background-color: #f40612;
-}
-
-.movies-grid {
-    display: grid;
-    /* Check Note for explanation */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem;
-    width: 100%;
-    justify-content: center;
-    /* Ensures grid items align properly */
-    align-items: stretch;
-    /* Makes all movie cards the same height */
-}
-
-
-/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
-
-
 /* Modal Background */
 .movie-modal {
     position: fixed;
@@ -176,37 +116,9 @@
         transform: scale(1);
     }
 }
-/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
 
+/* ============= Responsiveness ============= */
 
-/* ================== Responsiveness ================== */
-
-@media (max-width: 639px) {
-    .home-page {
-        padding: 1rem 0;
-    }
-
-    .search-form {
-        margin-bottom: 1rem;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .search-button {
-        width: 100px;
-    }
-
-    .search-input {
-        width: 100%;
-    }
-
-    .movies-grid {
-        padding: 2rem;
-    }
-}
-
-/* xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx */
 @media (max-width: 600px) {
     .modal-content {
         padding: 15px;
@@ -225,25 +137,3 @@
         right: 20px;
     }
 }
-
-
-
-
-/* ============= Notes ============= */
-/* 
-Explanation of the CSS Code
-grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-This CSS rule is used in CSS Grid Layout to create a responsive grid with dynamic columns.
-
-
-grid-template-columns: Defines the number of columns in a grid layout.
-
-repeat(auto-fit, ...)
-repeat() generates multiple columns dynamically.
-auto-fit automatically adjusts the number of columns based on available space.
-
-minmax(300px, 1fr)
-minmax() ensures each column has a minimum and maximum width:
-300px: Each column is at least 300 pixels wide.
-1fr: Each column can grow up to 1 fraction of available space.
- */

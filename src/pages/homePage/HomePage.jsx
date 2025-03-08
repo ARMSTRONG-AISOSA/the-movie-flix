@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import MovieCard from '../../components/movieCard/MovieCard';
+import MovieCardModal from '../../components/movieCardModal/MovieCardModal';
 import './homePage.css';
 import { getPopularMovies, searchMovies } from '../../services/api';
+
 
 const HomePage = () => {
 
@@ -90,10 +92,11 @@ const HomePage = () => {
         setSelectedMovie(movie);
     };
 
-    // Function to close modal
+    // Close Modal
     const closeMovieDetails = () => {
-        setSelectedMovie(null);;
+        setSelectedMovie(null);
     };
+
 
     return (
         <div>
@@ -126,11 +129,11 @@ const HomePage = () => {
                             <>
                                 {/* Conditional render */}
                                 {movie.title.toLowerCase().includes(searchQuery.toLowerCase()) && (
-                                        <MovieCard
-                                            key={movie.id}
-                                            movie={movie}
-                                            onClick={() => openMovieDetails(movie)}
-                                        />
+                                    <MovieCard
+                                        key={movie.id}
+                                        movie={movie}
+                                        onClick={() => openMovieDetails(movie)}
+                                    />
 
                                 )}
                             </>
@@ -158,29 +161,12 @@ const HomePage = () => {
                 </button>
             </div>
 
-            {/* Movie Modal */}
-            {selectedMovie && (
-                <div 
-                className='movie-modal'
-                >
-                    <div
-                    className='movie-modal-background'
-                    onClick={closeMovieDetails}
-                    ></div>
+            {/* Render Movie Modal */}
+            <MovieCardModal
+                movie={selectedMovie}
+                onClose={closeMovieDetails}
+            />
 
-                    <div className='modal-content'>
-                        <span
-                            className='close-btn'
-                            onClick={closeMovieDetails}
-                        >&times;</span>
-
-                        <h2>{selectedMovie.title}</h2>
-                        <img src={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`} alt={selectedMovie.tite} />
-                        <p><strong>Release Date:</strong> {selectedMovie.release_date}</p>
-                        <p><strong>Overview:</strong> {selectedMovie.overview}</p>
-                    </div>
-                </div>
-            )}
         </div>
 
     )
