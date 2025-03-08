@@ -15,10 +15,13 @@ const movieCardModal = ({ movie, onClose }) => {
       ></div>
 
       <div className='modal-content'>
-        <span
-          className='close-btn'
-          onClick={onClose}
-        >&times;</span>
+        <div
+          className='close-btn-div'
+          onClick={onClose}>
+          <span
+            className='close-btn'
+          >&times;</span>
+        </div>
 
         <h2>{movie.title}</h2>
         <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.tite} />

@@ -49,7 +49,8 @@
 .modal-content::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey;
     border-radius: 10px;
-    margin: 7px 0; /* Adjust top & bottom margins to limit scrollbar thumb length */
+    margin: 7px 0;
+    /* Adjust top & bottom margins to limit scrollbar thumb length */
 }
 
 /* Handle */
@@ -64,21 +65,31 @@
     background: #463f409a;
 }
 
-/* Close Button */
-.close-btn {
+
+.close-btn-div {
     position: absolute;
+    background-color: #333;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
     top: 10px;
     right: 20px;
-    font-size: 40px;
-    font-weight: 800;
-    color: #333;
     cursor: pointer;
-    transition: color 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
-.close-btn:hover {
-    color: #ce0404;
+.close-btn-div:hover {
+    background-color: #ce0404;
 }
+
+.close-btn {
+    font-size: 30px;
+    font-weight: 800;
+    color: #fff;
+}
+
+
+
 
 /* Movie Title */
 .modal-content h2 {
@@ -132,8 +143,12 @@
         font-size: 0.9rem;
     }
 
+    .close-btn-div {
+        height: 35px;
+        width: 35px;
+    }
+    
     .close-btn {
-        font-size: 30px;
-        right: 20px;
+        font-size: 26px;
     }
 }
