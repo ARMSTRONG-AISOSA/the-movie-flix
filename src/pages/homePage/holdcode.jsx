@@ -15,14 +15,12 @@ const HomePage = () => {
     const [page, setPage] = useState(1); // Current page
     const [totalPages, setTotalPages] = useState(1); // Track total pages
     const [selectedMovie, setSelectedMovie] = useState(null);
-    const [searchHistory, setSearchHistory] = useState(() => {
-        try {
-          return JSON.parse(localStorage.getItem("searchHistory")) || [];
-        } catch (error) {
-            console.log("searchHistory", error);
-          return [];
-        }
-      }); //JSON.parse convert retrived JSON string('[]') into an Array([]) object
+    // if (!localStorage.getItem("searchHistory")) {
+    //     localStorage.setItem("searchHistory", JSON.stringify([])); // Set empty array
+    // }
+    const [searchHistory, setSearchHistory] = useState(
+        JSON.parse(localStorage.getItem("searchHistory")) || []
+    ); //JSON.parse convert retrived JSON string('[]') into an Array([]) object
 
     // UseEffect
     // Movie data object
@@ -48,9 +46,9 @@ const HomePage = () => {
                 fetchedTotalPages = response.total_pages; // Extracts total pages from API
 
                 //Console
-                // console.log(response);
-                // console.log(fetchedTotalPages);
-                // console.log(`Movies for page ${page}:`, fetchedMovies);
+                console.log(response);
+                console.log(fetchedTotalPages);
+                console.log(`Movies for page ${page}:`, fetchedMovies);
 
                 // Data
                 setMovies(fetchedMovies); //Update Movie object data
