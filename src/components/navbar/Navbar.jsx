@@ -1,19 +1,33 @@
 import { Link } from 'react-router-dom';
 import './navbar.css';
 import DynamicLogo from '../dynamicLogo/DynamicLogo';
-
+import { MdMenu, MdMenuOpen } from "react-icons/md";
+import { } from "react-icons/md";
+import { useState } from 'react';
 const Navbar = () => {
+
+    const [menuOpen, setMenuOpen] = useState(false);
 
     return (
         <nav className='navbar'>
             <div className='navbar-logo'>
                 <DynamicLogo />
             </div>
-            <div className='navbar-links'>
+
+            <div
+                className='hamburger-menu'
+                onClick={
+                    () => setMenuOpen(!menuOpen)
+                }
+            >
+                {!menuOpen ? <MdMenu /> : <MdMenuOpen />}
+            </div>
+
+            <div className={`navbar-links ${menuOpen ? 'active' : ''}`}>
                 <Link to='/the-movie-flix' className='nav-link'>Home</Link>
                 <Link to='/the-movie-flix/favorites' className='nav-link'>Favorites</Link>
-                <Link to='#' className='nav-link'>Categoties</Link>
-                <Link to='/the-movie-flix/favorites' className='nav-link'>Contact</Link>
+                <Link to='#' className='nav-link'>Categorties</Link>
+                <Link to='#' className='nav-link'>Contact</Link>
             </div>
         </nav>
     )

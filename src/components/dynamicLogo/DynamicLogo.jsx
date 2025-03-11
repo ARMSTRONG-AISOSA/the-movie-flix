@@ -15,7 +15,7 @@ const DynamicLogo = () => {
         const updateLogo = () => {
             if (window.innerWidth >= 1024) {
                 setLogo(desktop_logo);
-            } else if (window.innerWidth >= 768) {
+            } else if (window.innerWidth >= 422) {
                 setLogo(tablet_logo);
             } else {
                 setLogo(mobile_logo);
