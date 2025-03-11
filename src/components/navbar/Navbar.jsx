@@ -50,6 +50,8 @@ const Navbar = () => {
             <div className='navbar-links'>
                 <Link to='/the-movie-flix' className='nav-link'>Home</Link>
                 <Link to='/the-movie-flix/favorites' className='nav-link'>Favorites</Link>
+                <Link to='#' className='nav-link'>Categoties</Link>
+                <Link to='/the-movie-flix/favorites' className='nav-link'>Contact</Link>
             </div>
         </nav>
     )

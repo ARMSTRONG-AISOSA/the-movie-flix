@@ -16,13 +16,19 @@ const HomePage = () => {
     const [totalPages, setTotalPages] = useState(1); // Track total pages
     const [selectedMovie, setSelectedMovie] = useState(null);
     const [searchHistory, setSearchHistory] = useState(() => {
+
+        // The try/catch block is used to handle any parsing errors and defaults to an empty array if something goes wrong.
         try {
-          return JSON.parse(localStorage.getItem("searchHistory")) || [];
+            return (
+                JSON.parse(localStorage.getItem("searchHistory")) || []
+                //JSON.parse convert retrived JSON string('[]') into an Array([]) object
+            );
         } catch (error) {
             console.log("searchHistory", error);
-          return [];
+            return [];
         }
-      }); //JSON.parse convert retrived JSON string('[]') into an Array([]) object
+    });
+
 
     // UseEffect
     // Movie data object

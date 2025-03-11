@@ -4,6 +4,7 @@ import HomePage from './pages/homePage/HomePage';
 import Favorites from './pages/favorites/Favorites';
 import ErrorPage from './pages/errorPage/ErrorPage';
 import Navbar from './components/navbar/Navbar';
+import Footer from './components/footer/Footer';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         {/* Catch-all route for 404 errors */}
         <Route path='*' element={<ErrorPage />} />
       </Routes>
+      <Footer />
     </main>
   )
 }
