@@ -87,6 +87,7 @@ const HomePage = () => {
 
     const prevPage = () => {
         setPage((prevPage) => Math.max((prevPage - 1), 1));
+        window.scrollTo(0, 0); //scroll to top (after each function call)
     };
 
 
@@ -248,7 +249,7 @@ const HomePage = () => {
                 />
 
                 <button
-                onClick={goToPage}
+                    onClick={goToPage}
                 >Go</button>
 
                 <button
