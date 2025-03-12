@@ -15,6 +15,7 @@ const HomePage = () => {
     const [page, setPage] = useState(1); // Current page
     const [totalPages, setTotalPages] = useState(1); // Track total pages
     const [selectedMovie, setSelectedMovie] = useState(null);
+    const [inputPage, setInputPage] = useState(""); // state for the input page number
     const [searchHistory, setSearchHistory] = useState(() => {
 
         // The try/catch block is used to handle any parsing errors and defaults to an empty array if something goes wrong.
@@ -130,6 +131,30 @@ const HomePage = () => {
         localStorage.setItem("searchHistory", JSON.stringify(updatedHistory)); //Update local storage
     };
 
+    // Function to handle page number input
+    const handlePageInput = (e) => {
+        const value = e.target.value;
+
+        // Allow only numbers and empty values
+        if (value === "" || /^[0-9]+$/.test(value)) {
+            setInputPage(value);
+        }
+    };
+
+    // Function to  navigate to the entered page
+    const goToPage = () => {
+        const pageNumber = parseInt(inputPage, 10);
+
+        // Ensure the input is valid and within range
+        if (!isNaN(pageNumber) && pageNumber >= 1 && pageNumber <= totalPages) {
+            setPage(pageNumber);
+            setInputPage("") // Clear input after navigation
+            window.scrollTo(0, 0); //Scroll to top
+        } else {
+            alert(`Please enter a number between 1 and ${totalPages}`);
+        }
+    };
+
 
     return (
         <div>
@@ -211,6 +236,20 @@ const HomePage = () => {
                 > Previous</button>
 
                 <span> Page {page} of {totalPages} Total Pages </span>
+
+                {/* Input field for direct page navigation */}
+
+                <input
+                    type='text'
+                    value={inputPage}
+                    onChange={handlePageInput}
+                    placeholder='Go To page...'
+                    className='page-input'
+                />
+
+                <button
+                onClick={goToPage}
+                >Go</button>
 
                 <button
                     onClick={nextPage}
