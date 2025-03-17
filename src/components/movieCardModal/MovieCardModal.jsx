@@ -1,8 +1,27 @@
 import './movieCardModal.css';
+import { useMovieContext } from '../contexts/MovieContext';
 
-const movieCardModal = ({ movie, onClose }) => {
+const MovieCardModal = ({ movie, onClose }) => {
 
   if (!movie) return null;// Don't render if no movie is selected
+
+  // Context
+  const { addToFavorite, removeFromFavorites, isFavorite } = useMovieContext();
+  const favorite = isFavorite(movie.id);
+
+
+
+  // function
+  function onFavoriteClick(e) {
+    e.preventDefault();
+
+    if (favorite) {
+      removeFromFavorites(movie.id);
+    } else {
+      addToFavorite(movie);
+    }
+
+  }
 
 
   return (
@@ -24,7 +43,16 @@ const movieCardModal = ({ movie, onClose }) => {
         </div>
 
         <h2>{movie.title}</h2>
-        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.tite} />
+        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+        <div className='modal-fav-btn-div'>
+          <button
+            className={`modal-favorite-btn ${favorite ? 'active' : ''}`}
+            onClick={(e) => { onFavoriteClick(e); }}
+            aria-label={favorite ? "Remove from favorites" : "Add from favorites"}
+          >
+            ♥
+          </button>
+        </div>
         <p><strong>Release Date:</strong> {movie.release_date}</p>
         <p><strong>Overview:</strong> {movie.overview}</p>
       </div>
@@ -32,4 +60,4 @@ const movieCardModal = ({ movie, onClose }) => {
   )
 }
 
-export default movieCardModal;
+export default MovieCardModal;

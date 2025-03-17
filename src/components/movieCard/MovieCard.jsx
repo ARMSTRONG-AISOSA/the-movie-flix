@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './movieCard.css';
+import { useMovieContext } from '../contexts/MovieContext';
 
 const MovieCard = ({ movie, onClick }) => {
 
@@ -7,10 +8,22 @@ const MovieCard = ({ movie, onClick }) => {
     const [imageLoaded, setImageLoaded] = useState(false);
 
 
+    // Context
+    const { addToFavorite, removeFromFavorites, isFavorite } = useMovieContext();
+    const favorite = isFavorite(movie.id);
+
+
+
     // function
-    function onFavoriteClick() {
-        alert("Favorite Clicked!");
-        console.log("poster Data", movie);
+    function onFavoriteClick(e) {
+        e.preventDefault();
+
+        if (favorite) {
+            removeFromFavorites(movie.id);
+        } else {
+            addToFavorite(movie);
+        }
+
     }
 
     // Skeleton Image 
@@ -24,7 +37,6 @@ const MovieCard = ({ movie, onClick }) => {
             <div className='movie-poster' onClick={onClick}>
                 {!imageLoaded && <div className={`skeleton-image `}>
                     <p
-                        // className={`${visibility ? "visible" : "hide"}`}
                         className={`visibility-animation`}
                     >No Image Found!</p>
                 </div>}
@@ -37,12 +49,14 @@ const MovieCard = ({ movie, onClick }) => {
                 <div className='movie-overlay'>
 
                     <button
-                        className='favorite-btn'
+                        className={`favorite-btn ${favorite ? 'active' : ''}`}
                         onClick={(e) => {
                             // Prevents clicking the heart from triggering the card click
                             e.stopPropagation();
-                            onFavoriteClick();
+                            e.preventDefault();
+                            onFavoriteClick(e);
                         }}
+                        aria-label={favorite ? "Remove from favorites" : "Add from favorites"}
                     >
                         ♥
                     </button>

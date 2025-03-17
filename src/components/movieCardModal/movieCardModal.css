@@ -107,6 +107,42 @@
     margin-bottom: 15px;
 }
 
+.modal-fav-btn-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-favorite-btn {
+    color: white;
+    font-size: 1.5rem;
+    /* padding: 0.5rem; */
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    border: none;
+}
+
+.modal-favorite-btn:hover {
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+
+.modal-favorite-btn.active {
+    color: red;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-favorite-btn:hover.active {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
 /* Movie Details */
 .modal-content p {
     font-size: 1rem;
