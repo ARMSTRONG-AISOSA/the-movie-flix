@@ -24,8 +24,19 @@ const Navbar = () => {
             </div>
 
             <div className={`navbar-links ${menuOpen ? 'active' : ''}`}>
-                <Link to='/the-movie-flix' className='nav-link'>Home</Link>
-                <Link to='/the-movie-flix/favorites' className='nav-link'>Favorites</Link>
+                <Link
+                    to='/the-movie-flix'
+                    className='nav-link'
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >Home</Link>
+
+                <Link
+                    to='/the-movie-flix/favorites'
+
+                    className='nav-link'
+                    onClick={() => setMenuOpen(!menuOpen)}
+                >Favorites</Link>
+
                 <Link to='#' className='nav-link'>Categorties</Link>
                 <Link to='#' className='nav-link'>Contact</Link>
             </div>
