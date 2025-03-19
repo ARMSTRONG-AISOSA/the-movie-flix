@@ -180,7 +180,7 @@ const HomePage = () => {
                     {/* Search History Dropdown */}
                     {/* True if search history (from localStorage) is not empty*/}
                     {searchHistory.length > 0 && (
-                        <div className='search-history'>
+                        <div className='search-history hide-search-terms'>
                             {searchHistory.map((pastQuery, index) => (
                                 <div
                                     key={index}
